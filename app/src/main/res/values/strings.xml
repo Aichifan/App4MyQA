@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App 4 MyQA</string>
+    <string name="management">Question Management</string>
+    <string name="login">LOGIN</string>
+    <string name="loginID">LoginID</string>
+    <string name="password">Password</string>
 </resources>
