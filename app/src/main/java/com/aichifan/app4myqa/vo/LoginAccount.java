@@ -7,6 +7,15 @@ public class LoginAccount {
     private String loginID;
     private String password;
 
+    public LoginAccount() {
+
+    }
+
+    public LoginAccount(String loginID, String password) {
+        this.loginID = loginID;
+        this.password = password;
+    }
+
     public String getLoginID() {
         return loginID;
     }
