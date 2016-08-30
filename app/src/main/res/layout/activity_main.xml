@@ -1,16 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.aichifan.app4myqa.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ViewStub
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:id="@+id/stubHeader"
+        android:inflatedId="@+id/header"
+        android:layout="@layout/header"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp"
+        android:layout_weight="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/overView"
+                    android:text="@string/OverviewActivityTitle"
+                    android:onClick="onButtonClick"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/caseHand"
+                    android:text="@string/CaseHandActivityTitle"
+                    android:onClick="onButtonClick"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/SysAdmin"
+                    android:text="@string/SystemAdministratorActivityTitle"
+                    android:onClick="onButtonClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventManage"
+                android:text="@string/EventManageActivityTitle"
+                android:onClick="onButtonClick"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wmsManage"
+                android:text="@string/WMSManageActivityTitle"
+                android:onClick="onButtonClick"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tmsManage"
+                android:text="@string/TMSManageActivityTitle"
+                android:onClick="onButtonClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventClosed"
+                android:text="@string/EventClosedActivityTitle"
+                android:onClick="onButtonClick"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wmsClosed"
+                android:text="@string/WMSClosedActivityTitle"
+                android:onClick="onButtonClick"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tmsClosed"
+                android:text="@string/TMSClosedActivityTitle"
+                android:onClick="onButtonClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventHistory"
+                android:text="@string/EventHistoricalActivityTitle"
+                android:onClick="onButtonClick"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wmsHistory"
+                android:text="@string/WMSHistoricalActivityTitle"
+                android:onClick="onButtonClick"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tmsHistory"
+                android:text="@string/TMSHistoricalActivityTitle"
+                android:onClick="onButtonClick"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

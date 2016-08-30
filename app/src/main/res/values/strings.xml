@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">App 4 MyQA</string>
+    <string name="OverviewActivityTitle">概览</string>
+    <string name="CaseHandActivityTitle">案例处理</string>
+    <string name="SystemAdministratorActivityTitle">系统管理</string>
+    <string name="EventManageActivityTitle">事件管理</string>
+    <string name="WMSManageActivityTitle">WMS管理</string>
+    <string name="TMSManageActivityTitle">TMS管理</string>
+    <string name="EventClosedActivityTitle">事件关闭</string>
+    <string name="WMSClosedActivityTitle">WMS关闭</string>
+    <string name="TMSClosedActivityTitle">TMS关闭</string>
+    <string name="EventHistoricalActivityTitle">事件历史解决查询</string>
+    <string name="WMSHistoricalActivityTitle">WMS历史解决查询</string>
+    <string name="TMSHistoricalActivityTitle">TMS历史解决查询</string>
 </resources>
