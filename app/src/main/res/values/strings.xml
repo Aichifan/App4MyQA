@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">App 4 MyQA</string>
+    <string name="title_name">WMS/管理/新增</string>
+    <string name="program_name">项目</string>
+    <string name="city_name">城市</string>
+    <string name="questiontype_name">问题类型</string>
+    <string name="scaleofproblem_name">问题严重性</string>
+    <string name="starttime_name">项目发起时间</string>
+    <string name="endtime_name">要求结束时间</string>
+    <string name="email_name">邮件人</string>
+    <string name="emailgroup_name">邮件组</string>
+    <string name="conductor_name">处理人</string>
+    <string name="describequestion_name">问题描述</string>
+    <string name="attchment_name">附件</string>
+    <string name="submit_name">提交</string>
+    <string name="reset_name">重置</string>
 </resources>
