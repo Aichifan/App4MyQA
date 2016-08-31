@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">App 4 MyQA</string>
-<<<<<<< HEAD
     <string name="event_add">事件管理/新增</string>
     <string name="event_project_name">*项目名称(Project) :</string>
     <string name="event_supplier">*所属供应商:</string>
@@ -21,10 +20,8 @@
     <string name="event_root_cause">问题根本原因(Root Cause):</string>
     <string name="event_corrective_action">改变方案(Corrective Action):</string>
     <string name="event_accessory">附件：</string>
-=======
     <string name="management">Question Management</string>
     <string name="login">LOGIN</string>
     <string name="loginID">LoginID</string>
     <string name="password">Password</string>
->>>>>>> refs/remotes/origin/master
 </resources>
