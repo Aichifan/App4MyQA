@@ -3,7 +3,7 @@
     <string name="management">Question Management</string>
     <string name="login">LOGIN</string>
     <string name="loginID">LoginID</string>
-    <string name="password">Password</string>=
+    <string name="password">Password</string>
     <string name="event_add">事件管理/新增</string>
     <string name="event_project_name">*项目名称(Project) :</string>
     <string name="event_supplier">*所属供应商:</string>
