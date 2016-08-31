@@ -64,7 +64,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventManageBtn"
-                android:text="@string/EventManageActivityTitle"
+                android:text="@string/EventAddActivityTitle"
                 android:textSize="21dp"
                 android:layout_marginLeft="10dp"
                 android:drawableTop="@mipmap/manage"

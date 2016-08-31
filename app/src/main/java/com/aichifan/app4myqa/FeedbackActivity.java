@@ -9,7 +9,5 @@ public class FeedbackActivity extends UserInfoActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
-
-        setHeader(getString(R.string.FeedbackActivityTitle), false, true);
     }
 }

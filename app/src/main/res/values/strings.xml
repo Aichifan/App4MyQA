@@ -7,7 +7,7 @@
     <string name="OverviewActivityTitle">信息概览</string>
     <string name="CaseHandActivityTitle">案例处理</string>
     <string name="SystemAdministratorActivityTitle">系统管理</string>
-    <string name="EventManageActivityTitle">事件管理</string>
+    <string name="EventAddActivityTitle">事件管理</string>
     <string name="WMSManageActivityTitle">WMS管理</string>
     <string name="TMSManageActivityTitle">TMS管理</string>
     <string name="EventClosedActivityTitle">事件关闭</string>

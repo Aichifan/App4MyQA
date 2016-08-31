@@ -12,14 +12,5 @@
         android:id="@+id/stubHeader"
         android:inflatedId="@+id/header"
         android:layout="@layout/header"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:text="@string/WMSManageActivityTitle"
-        android:textSize="30dp"
-        android:layout_gravity="center"/>
-
 </LinearLayout>
 
