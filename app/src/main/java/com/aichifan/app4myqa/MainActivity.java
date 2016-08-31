@@ -1,6 +1,5 @@
 package com.aichifan.app4myqa;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +17,7 @@ import com.google.gson.Gson;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import com.aichifan.app4myqa.vo.LoginAccount;
 
 public class MainActivity extends AppCompatActivity {
     public static final String HOST = "http://139.196.56.98:8080/myQA";
@@ -26,8 +26,11 @@ public class MainActivity extends AppCompatActivity {
     public EditText passwordEdit;
     public LoginAccount mAccount;
 
+public class MainActivity extends AppCompatActivity {
+    public static final String HOST = "http://139.196.56.98:8080/myQA";
+    public ImageView mImageView;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -35,23 +38,21 @@ public class MainActivity extends AppCompatActivity {
         mImageView.setImageResource(R.mipmap.dhl);
     }
 
-    public void loginClick(View view){
-        loginIDEdit = (EditText)findViewById(R.id.edit_loginID);
-        passwordEdit = (EditText)findViewById(R.id.edit_password);
-        mAccount = new LoginAccount(loginIDEdit.getText().toString(),
-                passwordEdit.getText().toString());
+    public void loginClick(View view) {
+        final LoginAccount account = new LoginAccount(((EditText) findViewById(R.id.edit_loginID)).getText().toString(),
+                ((EditText) findViewById(R.id.edit_password)).getText().toString());
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Gson gson = new Gson();
-                InputStream is = MyUrlUtil.requestByUrl(HOST+"/main/login","POST",gson.toJson(mAccount));
+                InputStream is = MyUrlUtil.requestByUrl(HOST+"/main/login","POST",gson.toJson(account));
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(mAccount.getLoginID()!=null && mAccount.getPassword()!=null){
-                            Intent intent=new Intent(MainActivity.this,InfoActivity.class);
+                        if(account.getLoginID()!=null && account.getPassword()!=null){
+                            Intent intent=new Intent(MainActivity.this,UserInfoActivity.class);
                             startActivity(intent);
                             Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
                         }else{

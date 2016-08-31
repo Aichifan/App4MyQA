@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/management"
+        android:background="@color/dark_blue"
         android:textSize="30dp"
-        android:background="#8800ffff"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:id="@+id/textView" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_alignTop="@id/textView"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"/>
 
     <EditText
@@ -43,19 +43,22 @@
         android:hint="@string/password"
         android:textSize="21dp"
         android:layout_below="@+id/edit_loginID"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:textSize="21dp"
+        style="@style/BeatBoxButtonStrong"
         android:id="@+id/loginBtn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="140dp"
         android:onClick="loginClick"/>
+
+
 
 </RelativeLayout>
