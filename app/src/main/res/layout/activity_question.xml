@@ -41,6 +41,13 @@
         android:id="@+id/sp_program"
         android:background="@drawable/bg_edittext">
     </Spinner>
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignRight="@+id/sp_program"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/newdown"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -126,6 +133,14 @@
         android:id="@+id/ed_starttime"
         android:background="@drawable/bg_edittext">
     </EditText>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/ed_starttime"
+        android:src="@drawable/time"
+        android:layout_below="@+id/scaleofproblem"
+        android:layout_marginTop="20dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -146,6 +161,14 @@
         android:id="@+id/ed_endtime"
         android:background="@drawable/bg_edittext">
     </EditText>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/ed_endtime"
+        android:src="@drawable/time"
+        android:layout_below="@+id/ed_starttime"
+        android:layout_marginTop="15dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
