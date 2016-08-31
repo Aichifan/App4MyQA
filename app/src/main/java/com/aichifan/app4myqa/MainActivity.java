@@ -3,12 +3,14 @@ package com.aichifan.app4myqa;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.VectorEnabledTintResources;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.aichifan.app4myqa.pojo.User;
 import com.aichifan.app4myqa.util.MyUrlUtil;
 import com.aichifan.app4myqa.vo.LoginAccount;
 import com.google.gson.Gson;
