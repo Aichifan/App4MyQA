@@ -1,7 +1,6 @@
 package com.aichifan.app4myqa;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.VectorEnabledTintResources;
@@ -13,18 +12,10 @@ import android.widget.Toast;
 
 import com.aichifan.app4myqa.pojo.User;
 import com.aichifan.app4myqa.util.MyUrlUtil;
+import com.aichifan.app4myqa.vo.LoginAccount;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import com.aichifan.app4myqa.vo.LoginAccount;
-
-public class MainActivity extends AppCompatActivity {
-    public static final String HOST = "http://139.196.56.98:8080/myQA";
-    public ImageView mImageView;
-    public EditText loginIDEdit;
-    public EditText passwordEdit;
-    public LoginAccount mAccount;
 
 public class MainActivity extends AppCompatActivity {
     public static final String HOST = "http://139.196.56.98:8080/myQA";
