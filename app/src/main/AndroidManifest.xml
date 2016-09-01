@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".OverviewActivity" />
         <activity android:name=".EventAddActivity" />
-        <activity android:name=".WMSManageActivity" />
+        <activity android:name=".WMSAddActivity" />
         <activity android:name=".TMSManageActivity" />
         <activity android:name=".CaseHandActivity" />
         <activity android:name=".EventClosedActivity" />

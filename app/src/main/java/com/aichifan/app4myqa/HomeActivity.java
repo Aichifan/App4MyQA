@@ -37,7 +37,7 @@ public class HomeActivity extends UserInfoActivity {
                 break;
 
             case R.id.wmsManageBtn:
-                intent = new Intent(this, WMSManageActivity.class);
+                intent = new Intent(this, WMSAddActivity.class);
                 startActivity(intent);
                 break;
 

@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aichifan.app4myqa.QuestionActivity">
+    tools:context=".WMSAddActivity">
+
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/stubHeader"
+        android:inflatedId="@+id/header"
+        android:layout="@layout/header"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,7 +25,7 @@
         android:textSize="25dp"
         android:gravity="center"
         android:id="@+id/title"
-        android:background="#ff666666"/>
+        android:background="@color/colorLabelBackground"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -46,8 +53,7 @@
         android:layout_height="15dp"
         android:layout_alignRight="@+id/sp_program"
         android:layout_below="@+id/title"
-        android:layout_marginTop="18dp"
-        android:src="@drawable/newdown"/>
+        android:layout_marginTop="18dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -140,7 +146,6 @@
         android:src="@drawable/time"
         android:layout_below="@+id/scaleofproblem"
         android:layout_marginTop="20dp"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -168,7 +173,6 @@
         android:src="@drawable/time"
         android:layout_below="@+id/ed_starttime"
         android:layout_marginTop="15dp"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"

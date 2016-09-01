@@ -1,13 +1,11 @@
 package com.aichifan.app4myqa.util;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.aichifan.app4myqa.QuestionActivity;
-import com.aichifan.app4myqa.pojo.Group;
+import com.aichifan.app4myqa.WMSAddActivity;
 import com.aichifan.app4myqa.pojo.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,7 +33,7 @@ public class ConductorUtils {
         return arr ;
     }
     public static User conductor ;
-    public static User setAdapter(int layout , QuestionActivity activity , int itemlayout , ArrayList<String>arr, final User[]users)
+    public static User setAdapter(int layout , WMSAddActivity activity , int itemlayout , ArrayList<String>arr, final User[]users)
     {
         final Spinner sn= (Spinner) activity.findViewById(layout);
 
