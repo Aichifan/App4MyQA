@@ -331,20 +331,36 @@ public class EventAddActivity extends UserInfoActivity {
 
     private void lssueDate(final EditText editText) {
         final Calendar calendar = Calendar.getInstance();
-        editText.setOnClickListener(new View.OnClickListener() {
+//        editText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DatePickerDialog dialog = new DatePickerDialog(EventAddActivity.this, new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                        Calendar c = Calendar.getInstance();
+//                        c.set(year, monthOfYear, dayOfMonth);
+//                        editText.setText(DateFormat.format("yyy年MM月dd日", c));
+//                    }
+//                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+//                dialog.show();
+//            }
+//
+//        });
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(EventAddActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        Calendar c = Calendar.getInstance();
-                        c.set(year, monthOfYear, dayOfMonth);
-                        editText.setText(DateFormat.format("yyy年MM月dd日", c));
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dialog.show();
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    DatePickerDialog dialog = new DatePickerDialog(EventAddActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            Calendar c = Calendar.getInstance();
+                            c.set(year, monthOfYear, dayOfMonth);
+                            editText.setText(DateFormat.format("yyy年MM月dd日", c));
+                        }
+                    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                    dialog.show();
+                }
             }
-
         });
     }
 
