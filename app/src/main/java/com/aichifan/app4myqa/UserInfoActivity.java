@@ -14,7 +14,6 @@ public class UserInfoActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
     }
 
     public void setHeader(String title, boolean btnHomeVisible, boolean btnFeedbackVisible){

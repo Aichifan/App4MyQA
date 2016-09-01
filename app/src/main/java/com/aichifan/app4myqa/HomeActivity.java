@@ -10,8 +10,6 @@ public class HomeActivity extends UserInfoActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-
-        setHeader(getString(R.string.HomeActivityTitle), true, false);
     }
 
     public void onButtonClick(View view) {
@@ -34,7 +32,7 @@ public class HomeActivity extends UserInfoActivity {
                 break;
 
             case R.id.eventManageBtn:
-                intent = new Intent(this, EventManageActivity.class);
+                intent = new Intent(this, EventAddActivity.class);
                 startActivity(intent);
                 break;
 

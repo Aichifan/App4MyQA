@@ -41,7 +41,7 @@ import java.util.List;
 /**
  * Created by mic on 2016/8/30.
  */
-public class EventAddActivity extends Activity {
+public class EventAddActivity extends UserInfoActivity {
 
     private NiceSpinner event_project_name_select;
     private NiceSpinner event_supplier_select;
@@ -84,9 +84,11 @@ public class EventAddActivity extends Activity {
     private Button event_bt_commit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add);
+        setHeader(getString(R.string.EventAddActivityTitle), true, true);
+
         init();
         new Thread(new Runnable() {
             @Override
@@ -342,7 +344,7 @@ public class EventAddActivity extends Activity {
 
         ObjectMapper objectMapper = new ObjectMapper();
         User[] projectNames = new User[0];
-//        User[] projectNames = null;
+        //User[] projectNames = null;
         try {
             projectNames = objectMapper.readValue(new InputStreamReader(is), User[].class);
         } catch (IOException e) {

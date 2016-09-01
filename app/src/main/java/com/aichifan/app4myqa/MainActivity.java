@@ -3,7 +3,6 @@ package com.aichifan.app4myqa;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.VectorEnabledTintResources;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(account.getLoginID()!=null && account.getPassword()!=null){
-                            Intent intent=new Intent(MainActivity.this,UserInfoActivity.class);
+                            Intent intent=new Intent(MainActivity.this,HomeActivity.class);
                             startActivity(intent);
                             Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
                         }else{

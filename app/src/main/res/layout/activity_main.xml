@@ -59,8 +59,4 @@
         android:layout_marginBottom="140dp"
         android:onClick="loginClick"/>
 
-
-
-
-
 </RelativeLayout>

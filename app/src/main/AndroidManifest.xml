@@ -15,6 +15,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".OverviewActivity" />
+        <activity android:name=".EventAddActivity" />
+        <activity android:name=".WMSManageActivity" />
+        <activity android:name=".TMSManageActivity" />
+        <activity android:name=".CaseHandActivity" />
+        <activity android:name=".EventClosedActivity" />
+        <activity android:name=".WMSClosedActivity" />
+        <activity android:name=".TMSClosedActivity" />
+        <activity android:name=".EventHistoricalActivity" />
+        <activity android:name=".WMSHistoricalActivity" />
+        <activity android:name=".TMSHistoricalActivity" />
+        <activity android:name=".SystemAdministratorActivity" />
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".FeedbackActivity"></activity>
+
     </application>
 
 </manifest>
