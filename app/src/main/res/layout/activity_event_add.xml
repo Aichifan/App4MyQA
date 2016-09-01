@@ -234,11 +234,13 @@
                 android:text="@string/event_spc_name"
                 android:textSize="15dp" />
 
-            <com.aichifan.app4myqa.vagerview.NiceSpinner
+            <EditText
                 android:id="@+id/event_spc_name_select"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="请选择" />
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/event_spc_name"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
