@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventFragment"
+    android:background="#ffffffff">
+    <TextView
+        android:id="@+id/search_tv"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search: "
+        android:layout_marginLeft="200dp"
+        />
+    <EditText
+        android:id="@+id/search_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/search_tv"
+        android:layout_alignBaseline="@id/search_tv"
+        android:singleLine="true"
+        android:background="@drawable/bg_edittext"
+         />
+    <LinearLayout
+        android:id="@+id/excel"
+        android:background="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_tv"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_horizontal">
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/bianhao01"
+                    android:text="编号"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/faqiren01"
+                    android:text="发起人"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="1dp"
+                    android:gravity="center"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/state01"
+                    android:text="状态"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#777777" />
+        <ListView
+            android:id="@+id/eventlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+
+    </LinearLayout>
+
+</RelativeLayout>
