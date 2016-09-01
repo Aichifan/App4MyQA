@@ -94,6 +94,7 @@ public class EventAddActivity extends UserInfoActivity {
     private Button event_bt_commit;
 
     private String shijianchuo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,12 +138,12 @@ public class EventAddActivity extends UserInfoActivity {
     }
 
     private void moginMoni() {
-       InputStream is =  MyUrlUtil.moniLogin("cuiyuanhang","1234");
+        InputStream is = MyUrlUtil.moniLogin("cuiyuanhang", "1234");
         BufferedReader isb = new BufferedReader(new InputStreamReader(is));
         StringBuffer sb = new StringBuffer();
         String line = null;
         try {
-            while((line = isb.readLine()) != null){
+            while ((line = isb.readLine()) != null) {
                 sb.append(line);
             }
         } catch (IOException e) {
@@ -153,13 +154,13 @@ public class EventAddActivity extends UserInfoActivity {
         shijianchuo = sb.toString();
     }
 
-    private void commit(String s,String s1,String s2) {
+    private void commit(String s, String s1, String s2) {
         InputStream is = MyUrlUtil.requestByUrl(MainActivity.HOST + s, s1, s2);
         BufferedReader isb = new BufferedReader(new InputStreamReader(is));
         StringBuffer sb = new StringBuffer();
         String line = null;
         try {
-            while((line = isb.readLine()) != null){
+            while ((line = isb.readLine()) != null) {
                 sb.append(line);
             }
         } catch (IOException e) {
@@ -191,9 +192,9 @@ public class EventAddActivity extends UserInfoActivity {
             question.setSupplier(event_supplier_select.getText().toString());
         }
 
-        SimpleDateFormat sim=new SimpleDateFormat("yyy年MM月dd日");
+        SimpleDateFormat sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_et_lssue_date.getText().toString());
+            Date date = sim.parse(event_et_lssue_date.getText().toString());
             question.setIssueDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -206,8 +207,8 @@ public class EventAddActivity extends UserInfoActivity {
             question.setIsCFeedback(false);
         }
 
-        for (int i = 0;i<checkBoxs.size();i++){
-            if (checkBoxs.get(i).isChecked()){
+        for (int i = 0; i < checkBoxs.size(); i++) {
+            if (checkBoxs.get(i).isChecked()) {
                 ids.add(lists.get(i));
             }
         }
@@ -215,17 +216,17 @@ public class EventAddActivity extends UserInfoActivity {
         String json = gson.toJson(ids);
         question.setTeammates(json);
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_et_containment_date.getText().toString());
+            Date date = sim.parse(event_et_containment_date.getText().toString());
             question.setContainmentPlanDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_et_Action_plan_date.getText().toString());
+            Date date = sim.parse(event_et_Action_plan_date.getText().toString());
             question.setActionPlanDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -252,22 +253,22 @@ public class EventAddActivity extends UserInfoActivity {
         question.setSpc(event_spc_name_select.getText().toString());
         question.setOrderNo(event_et_order_no.getText().toString());
         question.setHawb(event_hawb.getText().toString());
-        SimpleDateFormat formatter = new SimpleDateFormat ("yyyy年MM月dd日    HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日    HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
         String str1 = formatter.format(curDate);
-        question.setPartInformation(str1+" 来自 "+shijianchuo+"\n"+event_part_information.getText().toString());
+        question.setPartInformation(str1 + " 来自 " + shijianchuo + "\n" + event_part_information.getText().toString());
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_scheduled_delivery_time.getText().toString());
+            Date date = sim.parse(event_scheduled_delivery_time.getText().toString());
             question.setScheduledTime(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_actual_delivery_time.getText().toString());
+            Date date = sim.parse(event_actual_delivery_time.getText().toString());
             question.setActualTime(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -286,7 +287,7 @@ public class EventAddActivity extends UserInfoActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    commit("/question/create","POST",str);
+                    commit("/question/create", "POST", str);
                 }
             }).start();
 
@@ -331,21 +332,21 @@ public class EventAddActivity extends UserInfoActivity {
 
     private void lssueDate(final EditText editText) {
         final Calendar calendar = Calendar.getInstance();
-//        editText.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DatePickerDialog dialog = new DatePickerDialog(EventAddActivity.this, new DatePickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                        Calendar c = Calendar.getInstance();
-//                        c.set(year, monthOfYear, dayOfMonth);
-//                        editText.setText(DateFormat.format("yyy年MM月dd日", c));
-//                    }
-//                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-//                dialog.show();
-//            }
-//
-//        });
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(EventAddActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar c = Calendar.getInstance();
+                        c.set(year, monthOfYear, dayOfMonth);
+                        editText.setText(DateFormat.format("yyy年MM月dd日", c));
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+
+        });
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -376,7 +377,7 @@ public class EventAddActivity extends UserInfoActivity {
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b){
+                    if (b) {
                         System.out.println(checkBox.getText().toString());
                         System.out.println(checkBoxs.get(1).getText().toString());
                         System.out.println(checkBoxs.get(1).isChecked());
@@ -521,7 +522,7 @@ public class EventAddActivity extends UserInfoActivity {
             String picturePath = cursor.getString(columnIndex);
             Log.v("picture path", picturePath);
             cursor.close();
-            Bitmap bitmap= BitmapFactory.decodeFile(picturePath);
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
 
         }
@@ -531,7 +532,7 @@ public class EventAddActivity extends UserInfoActivity {
 
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        Log.v("++++",permissionCheck+"");
+        Log.v("++++", permissionCheck + "");
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                     this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
