@@ -35,7 +35,6 @@ public class EventFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-
         new Thread()
         {
             public void run()
@@ -66,19 +65,17 @@ public class EventFragment extends Fragment {
                                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                                     }
-
                                     @Override
                                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                                     }
-
                                     @Override
                                     public void afterTextChanged(Editable editable) {
                                         String str = editable.toString();
                                         questions.clear();
                                         for(int i = 0;i<questions1.size();i++){
                                             if(questions1.get(i).getNumber().contains(str)||questions1.get(i).getCreator().getUsername().contains(str)||
-                                                    questions1.get(i).getClosed().toString().contains(str)){
+                                                    questions1.get(i).getType().contains(str)){
                                                 questions.add(questions1.get(i));
                                             }
                                         }
@@ -106,9 +103,6 @@ public class EventFragment extends Fragment {
                 }
             }
         }.start();
-    }
-    public void searchShow()
-    {
 
     }
 }

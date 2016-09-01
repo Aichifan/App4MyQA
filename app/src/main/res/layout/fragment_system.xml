@@ -13,15 +13,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="180dp"
             android:text="search："
             android:textSize="18dp"/>
         <EditText
-            android:id="@+id/search_et"
+            android:id="@+id/searchsystem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_edittext"/>
+            android:singleLine="true"
+            android:background="@drawable/bg_edittext"
+             />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/excel"
@@ -43,7 +45,7 @@
                 <TextView
                     android:id="@+id/bianhao01"
                     android:text="编号"
-                    android:textSize="18dp"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content" />
@@ -51,15 +53,15 @@
                 <TextView
                     android:id="@+id/faqiren01"
                     android:text="发起人"
-                    android:textSize="18dp"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/state01"
-                    android:text="状态"
-                    android:textSize="18dp"
+                    android:id="@+id/type01"
+                    android:text="类型"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content" />

@@ -14,26 +14,29 @@
             <TextView
                 android:id="@+id/bianhao"
                 android:text="编号"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:gravity="center"
-                android:layout_width="15dp"
-                android:layout_height="45dp" />
+                android:layout_width="16dp"
+                android:layout_height="50dp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
             <TextView
                 android:id="@+id/faqiren"
                 android:text="发起人"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:gravity="center"
-                android:layout_width="15dp"
-                android:layout_height="45dp" />
+                android:layout_width="16dp"
+                android:layout_height="50dp" />
             <TextView
                 android:id="@+id/state"
-                android:text="状态"
-                android:textSize="18dp"
+                android:text="问题类型"
+                android:textSize="16dp"
                 android:gravity="center"
-                android:layout_width="15dp"
-                android:layout_height="45dp"
+                android:layout_width="16dp"
+                android:layout_height="50dp"
+                android:maxLines="2"
+                android:ellipsize="end"
                 />
         </TableRow>
     </TableLayout>
-
 </LinearLayout>
