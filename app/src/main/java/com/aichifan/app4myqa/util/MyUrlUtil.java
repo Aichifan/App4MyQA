@@ -59,6 +59,8 @@ public class MyUrlUtil {
             }
             if(conn.getResponseCode() == 200) {
                 return conn.getInputStream();
+            }else {
+                return conn.getInputStream();
             }
         } catch(MalformedURLException e) {
             e.printStackTrace();
@@ -69,7 +71,7 @@ public class MyUrlUtil {
         return null;
     }
 
-    public static void moniLogin(String loginID, String password) {
+    public static InputStream moniLogin(String loginID, String password) {
         LoginAccount account = new LoginAccount(loginID, password);
         try {
             URL url = new URL(MainActivity.HOST + "/main/login");
@@ -94,13 +96,14 @@ public class MyUrlUtil {
                         msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
                     }
                 }
+                return conn.getInputStream();
             }
         } catch(MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return null;
     }
 
 }
