@@ -58,8 +58,18 @@ public class MyUrlUtil {
                 os.close();
             }
             if(conn.getResponseCode() == 200) {
-                return conn.getInputStream();
-            }else {
+                if(urlStr.endsWith("main/login")) {
+                    msCookieManager.getCookieStore().removeAll();
+                }
+                if(msCookieManager.getCookieStore().getCookies().size() == 0) {
+                    Map<String, List<String>> headerFields = conn.getHeaderFields();
+                    List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+                    if (cookiesHeader != null) {
+                        for (String cookie : cookiesHeader) {
+                            msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
+                        }
+                    }
+                }
                 return conn.getInputStream();
             }
         } catch(MalformedURLException e) {
@@ -67,10 +77,9 @@ public class MyUrlUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
-
+    /*
     public static InputStream moniLogin(String loginID, String password) {
         LoginAccount account = new LoginAccount(loginID, password);
         try {
@@ -104,6 +113,6 @@ public class MyUrlUtil {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
 }

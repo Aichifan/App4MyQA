@@ -39,7 +39,7 @@ public class EventFragment extends Fragment {
         {
             public void run()
             {
-                MyUrlUtil.moniLogin("admin","admin");
+                //MyUrlUtil.moniLogin("admin","admin");
                 final ArrayList<Question> questions = new ArrayList<Question>();
                 final ArrayList<Question> questions1=new ArrayList<Question>();
                 InputStream is=MyUrlUtil.requestByUrl(MainActivity.HOST+"/question/pmList","GET",null);

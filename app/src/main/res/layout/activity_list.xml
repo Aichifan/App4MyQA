@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
      android:orientation="vertical"
     tools:context="com.aichifan.app4myqa.ListActivity">
+
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/stubHeader"
+        android:inflatedId="@+id/header"
+        android:layout="@layout/header" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"

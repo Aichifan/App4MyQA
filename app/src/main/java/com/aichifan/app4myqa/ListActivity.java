@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 
-public class ListActivity extends AppCompatActivity implements View.OnClickListener{
+public class ListActivity extends UserInfoActivity implements View.OnClickListener{
     public static final String HOST = "http://139.196.56.98:8080/myQA";
     private EventFragment eventFragment;
     /**
@@ -28,9 +28,12 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
      */
     private FragmentManager fragmentManager;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        setHeader(getString(R.string.OverviewActivityTitle), true, true);
+
         initViews();
         fragmentManager = getFragmentManager();
         // 第一次启动时选中第0个tab
