@@ -105,8 +105,6 @@ public class EventAddActivity extends UserInfoActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                moginMoni();
-
                 projectName("/dict/projects");
                 supplier("/dict/suppliers");
                 feedback();
@@ -153,13 +151,6 @@ public class EventAddActivity extends UserInfoActivity {
         }
 
         System.out.println(sb);
-//        Gson gson = new Gson();
-//        ProjectName[] projectNames = gson.fromJson(new InputStreamReader(is), ProjectName[].class);
-//        datesProvenace = new ArrayList<String>();
-//        datesProvenace.add("请选择");
-//        for (int i = 0; i < projectNames.length; i++) {
-//            datesProvenace.add(projectNames[i].getText().toString().trim());
-//        }
     }
 
     private void commitInfo() {
@@ -265,7 +256,6 @@ public class EventAddActivity extends UserInfoActivity {
         question.setCorrectiveAction(event_corrective_action.getText().toString());
         clearData();
         ObjectMapper objectMapper = new ObjectMapper();
-//        StringWriter userBeanToJson = new StringWriter();
         try {
             final String str = objectMapper.writeValueAsString(question);
             System.out.println(str);
@@ -379,7 +369,6 @@ public class EventAddActivity extends UserInfoActivity {
 
         ObjectMapper objectMapper = new ObjectMapper();
         User[] projectNames = new User[0];
-        //User[] projectNames = null;
         try {
             projectNames = objectMapper.readValue(new InputStreamReader(is), User[].class);
         } catch (IOException e) {
@@ -457,21 +446,6 @@ public class EventAddActivity extends UserInfoActivity {
                 commitInfo();
             }
         });
-//        event_bt_accessory.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                int permissionCheck = ContextCompat.checkSelfPermission(EventAddActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-//                System.out.println(permissionCheck+"+++++"+PackageManager.PERMISSION_GRANTED);
-//                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(
-//                            EventAddActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-//                } else {
-//                    startActivityForResult(intent, IMAGE_REQUEST_CODE);
-//                }
-//            }
-//        });
-
     }
 
     private void clearData() {
@@ -508,8 +482,6 @@ public class EventAddActivity extends UserInfoActivity {
             Log.v("picture path", picturePath);
             cursor.close();
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-
-
         }
     }
 
@@ -535,12 +507,9 @@ public class EventAddActivity extends UserInfoActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-
                 } else {
-
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }

@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_password"
         android:hint="@string/password"
+        android:inputType="textPassword"
         android:textSize="21dp"
         android:layout_below="@+id/edit_loginID"
         android:layout_marginTop="30dp"

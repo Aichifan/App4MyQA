@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginClick(View view) {
-        final LoginAccount account = new LoginAccount(((EditText) findViewById(R.id.edit_loginID)).getText().toString(),
+        final LoginAccount account = new LoginAccount(
+                ((EditText) findViewById(R.id.edit_loginID)).getText().toString(),
                 ((EditText) findViewById(R.id.edit_password)).getText().toString());
         user.setLoginid(account.getLoginID());
         user.setPassword(account.getPassword());
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Gson gson = new Gson();
                 InputStream is = MyUrlUtil.requestByUrl(HOST+"/main/login","POST",gson.toJson(account));
+                if(is != null){
+                    Log.v("return", "++++++++");
                 BufferedReader isb = new BufferedReader(new InputStreamReader(is));
                 StringBuffer sb = new StringBuffer();
                 String line = null;
@@ -56,11 +59,10 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Log.v("return", sb.toString());
-                if(is != null){
-//                    User returnAccount = gson.fromJson(new InputStreamReader(is), User.class);
+
                     user.setUsername(sb.toString());
 
-                    if(!TextUtils.isEmpty(sb)){
+                    if(!TextUtils.isEmpty(user.getUsername())){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -69,23 +71,18 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }else{
-                        Toast.makeText(MainActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
                     }
-                }
-                /*
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(account.getLoginID()!=null){
-                            Intent intent=new Intent(MainActivity.this,HomeActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                        }else{
+                }else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
                             Toast.makeText(MainActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
+                            ((EditText) findViewById(R.id.edit_loginID)).setText("");
+                            ((EditText) findViewById(R.id.edit_password)).setText("");
                         }
-                    }
-                });*/
+                    });
+
+                }
             }
         }).start();
     }
