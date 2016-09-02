@@ -3,9 +3,9 @@ This is an android app for myQA application.纳米科技培训项目。
 
 ## 简要说明
 
-原myQA网站地址：http://139.196.56.98:8080/myQA/#!login
-API地址：http://139.196.56.98:8080/myQA/swagger/index.html
-GitHub项目地址：https://github.com/Aichifan/App4MyQA/tree/master
+  * 原myQA网站地址：http://139.196.56.98:8080/myQA/#!login
+  * API地址：http://139.196.56.98:8080/myQA/swagger/index.html
+  * GitHub项目地址：https://github.com/Aichifan/App4MyQA/tree/master
 
 ## 项目模块分配
 
