@@ -10,7 +10,7 @@ public class Group {
 
     private Date modified;
 
-    private Boolean locked;
+    private Boolean locked = false;
 
     private String name;
     
