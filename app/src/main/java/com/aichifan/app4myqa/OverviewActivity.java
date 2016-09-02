@@ -1,5 +1,7 @@
 package com.aichifan.app4myqa;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -16,7 +18,6 @@ public class OverviewActivity extends UserInfoActivity {
     ArrayList<View> viewContainer=new ArrayList<>();
     ArrayList<String> titleContainer=new ArrayList<>();
     public String TAG="tag";
-    ArrayList<EventFragment> fragmentArrayList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".WMSAddActivity">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/stub">
     <ViewStub
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,9 +17,11 @@
         android:inflatedId="@+id/header"
         android:layout="@layout/header"/>
 
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/stub">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,7 +33,7 @@
         android:textSize="25dp"
         android:gravity="center"
         android:id="@+id/title"
-        android:background="@color/colorLabelBackground"/>
+        android:background="@color/colorLabelBackground" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
@@ -143,14 +150,14 @@
         android:layout_height="40dp"
         android:layout_alignRight="@+id/ed_starttime"
         android:src="@drawable/time"
-        android:layout_below="@+id/scaleofproblem"
+        android:layout_below="@+id/starttime"
         android:layout_marginTop="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:text="@string/endtime_name"
         android:textSize="22dp"
-        android:layout_below="@+id/image_starttime"
+        android:layout_below="@+id/ed_starttime"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="30dp"
         android:textColor="#ff000000"
@@ -169,14 +176,14 @@
         android:layout_height="40dp"
         android:layout_alignRight="@+id/ed_endtime"
         android:src="@drawable/time"
-        android:layout_below="@+id/ed_starttime"
+        android:layout_below="@+id/endtime"
         android:layout_marginTop="15dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:text="@string/email_name"
         android:textSize="22dp"
-        android:layout_below="@+id/image_endtime"
+        android:layout_below="@+id/ed_endtime"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="30dp"
         android:textColor="#ff000000"
@@ -206,7 +213,7 @@
         android:layout_height="25dp"
         android:layout_toRightOf="@+id/emailgroup"
         android:layout_marginLeft="10dp"
-        android:layout_below="@+id/ed_endtime"
+        android:layout_below="@+id/email"
         android:layout_marginTop="25dp"
         android:entries="@array/pro"
         android:id="@+id/sp_emailgroup"
