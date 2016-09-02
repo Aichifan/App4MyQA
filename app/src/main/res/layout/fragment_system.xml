@@ -9,19 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="#ffffff"
         android:layout_marginTop="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
-            android:text="search："
-            android:textSize="18dp"/>
+            android:text="search:"
+            android:textSize="16dp"/>
         <EditText
-            android:id="@+id/search_et"
+            android:id="@+id/searchsystem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edittext"/>
+            android:layout_weight="1" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/excel"
@@ -39,11 +39,12 @@
             android:stretchColumns="0,1,2">
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/violet">
                 <TextView
                     android:id="@+id/bianhao01"
                     android:text="编号"
-                    android:textSize="18dp"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content" />
@@ -51,7 +52,7 @@
                 <TextView
                     android:id="@+id/faqiren01"
                     android:text="发起人"
-                    android:textSize="18dp"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content" />
@@ -59,7 +60,7 @@
                 <TextView
                     android:id="@+id/state01"
                     android:text="状态"
-                    android:textSize="18dp"
+                    android:textSize="20dp"
                     android:gravity="center"
                     android:layout_width="15dp"
                     android:layout_height="wrap_content" />

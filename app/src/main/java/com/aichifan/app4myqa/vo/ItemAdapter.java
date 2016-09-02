@@ -25,11 +25,14 @@ public class ItemAdapter extends ArrayAdapter<Question>
         super(context, resource,events);
         this.context = context;
         this.events=events;
-        if (events.toString().equals("[]"))
-        {
-            Log.v("test","null");
-        }
-
+    }
+    public int getCount()
+    {
+        return events.size();
+    }
+    public void addEvent(Question event)
+    {
+        events.add(event);
     }
     public View getView(int position, View convertView, ViewGroup parent) {
         View rowView;
@@ -40,12 +43,12 @@ public class ItemAdapter extends ArrayAdapter<Question>
         TextView number=(TextView)rowView.findViewById(R.id.bianhao);
         TextView creator=(TextView)rowView.findViewById(R.id.faqiren);
         TextView status=(TextView)rowView.findViewById(R.id.state);
-
-            Question event= new Question();
-                    event = events.get(position);
+        Question event= new Question();
+        event = events.get(position);
+        System.out.println(event.getNumber());
             number.setText(event.getNumber());
             creator.setText(event.getCreator().getUsername());
-            status.setText(new Boolean(event.getClosed()).toString());
+            status.setText(event.getType());
         return rowView;
     }
 }
