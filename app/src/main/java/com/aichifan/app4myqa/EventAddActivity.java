@@ -1,15 +1,25 @@
 package com.aichifan.app4myqa;
 
-import android.app.Activity;
-
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,7 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aichifan.app4myqa.pojo.City;
-import com.aichifan.app4myqa.pojo.Group;
 import com.aichifan.app4myqa.pojo.ProjectName;
 import com.aichifan.app4myqa.pojo.Question;
 import com.aichifan.app4myqa.pojo.User;
@@ -30,7 +39,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +51,8 @@ import java.util.List;
  */
 public class EventAddActivity extends UserInfoActivity {
 
+    private static final int IMAGE_REQUEST_CODE = 1;
+    private static final int PICK_CONTACT_REQUEST = 2;
     private NiceSpinner event_project_name_select;
     private NiceSpinner event_supplier_select;
     private NiceSpinner event_feedback_select;
@@ -83,6 +93,8 @@ public class EventAddActivity extends UserInfoActivity {
     private Button event_bt_accessory;
     private Button event_bt_commit;
 
+    private String shijianchuo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +105,8 @@ public class EventAddActivity extends UserInfoActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                MyUrlUtil.moniLogin("cuiyuanhang","1234");
+                moginMoni();
+
                 projectName("/dict/projects");
                 supplier("/dict/suppliers");
                 feedback();
@@ -124,13 +137,30 @@ public class EventAddActivity extends UserInfoActivity {
         }).start();
     }
 
-    private void commit(String s,String s1,String s2) {
+    private void moginMoni() {
+        InputStream is = MyUrlUtil.moniLogin("cuiyuanhang", "1234");
+        BufferedReader isb = new BufferedReader(new InputStreamReader(is));
+        StringBuffer sb = new StringBuffer();
+        String line = null;
+        try {
+            while ((line = isb.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(sb);
+        shijianchuo = sb.toString();
+    }
+
+    private void commit(String s, String s1, String s2) {
         InputStream is = MyUrlUtil.requestByUrl(MainActivity.HOST + s, s1, s2);
         BufferedReader isb = new BufferedReader(new InputStreamReader(is));
         StringBuffer sb = new StringBuffer();
         String line = null;
         try {
-            while((line = isb.readLine()) != null){
+            while ((line = isb.readLine()) != null) {
                 sb.append(line);
             }
         } catch (IOException e) {
@@ -162,22 +192,23 @@ public class EventAddActivity extends UserInfoActivity {
             question.setSupplier(event_supplier_select.getText().toString());
         }
 
-        SimpleDateFormat sim=new SimpleDateFormat("yyy年MM月dd日");
+        SimpleDateFormat sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_et_lssue_date.getText().toString());
+            Date date = sim.parse(event_et_lssue_date.getText().toString());
             question.setIssueDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        if (event_feedback_select.getText().toString().equals("请选择")) {
-            question.setFeedback("");
+        if (event_feedback_select.getText().toString().equals("Y")) {
+            question.setIsCFeedback(true);
         } else {
-            question.setFeedback(event_feedback_select.getText().toString());
+            System.out.println("+++++++++++");
+            question.setIsCFeedback(false);
         }
 
-        for (int i = 0;i<checkBoxs.size();i++){
-            if (checkBoxs.get(i).isChecked()){
+        for (int i = 0; i < checkBoxs.size(); i++) {
+            if (checkBoxs.get(i).isChecked()) {
                 ids.add(lists.get(i));
             }
         }
@@ -185,17 +216,17 @@ public class EventAddActivity extends UserInfoActivity {
         String json = gson.toJson(ids);
         question.setTeammates(json);
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_et_containment_date.getText().toString());
+            Date date = sim.parse(event_et_containment_date.getText().toString());
             question.setContainmentPlanDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_et_Action_plan_date.getText().toString());
+            Date date = sim.parse(event_et_Action_plan_date.getText().toString());
             question.setActionPlanDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -222,20 +253,23 @@ public class EventAddActivity extends UserInfoActivity {
         question.setSpc(event_spc_name_select.getText().toString());
         question.setOrderNo(event_et_order_no.getText().toString());
         question.setHawb(event_hawb.getText().toString());
-        question.setPartInformation(event_part_information.getText().toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日    HH:mm:ss");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+        String str1 = formatter.format(curDate);
+        question.setPartInformation(str1 + " 来自 " + shijianchuo + "\n" + event_part_information.getText().toString());
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_scheduled_delivery_time.getText().toString());
-            question.setActionPlanDate(date);
+            Date date = sim.parse(event_scheduled_delivery_time.getText().toString());
+            question.setScheduledTime(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        sim=new SimpleDateFormat("yyy年MM月dd日");
+        sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
-            Date date=sim.parse(event_actual_delivery_time.getText().toString());
-            question.setActionPlanDate(date);
+            Date date = sim.parse(event_actual_delivery_time.getText().toString());
+            question.setActualTime(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -244,7 +278,7 @@ public class EventAddActivity extends UserInfoActivity {
         question.setDescription(event_recovery_description.getText().toString());
         question.setRootCause(event_root_cause.getText().toString());
         question.setCorrectiveAction(event_corrective_action.getText().toString());
-
+        clearData();
         ObjectMapper objectMapper = new ObjectMapper();
 //        StringWriter userBeanToJson = new StringWriter();
         try {
@@ -253,7 +287,7 @@ public class EventAddActivity extends UserInfoActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    commit("/question/create","POST",str);
+                    commit("/question/create", "POST", str);
                 }
             }).start();
 
@@ -313,6 +347,22 @@ public class EventAddActivity extends UserInfoActivity {
             }
 
         });
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    DatePickerDialog dialog = new DatePickerDialog(EventAddActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            Calendar c = Calendar.getInstance();
+                            c.set(year, monthOfYear, dayOfMonth);
+                            editText.setText(DateFormat.format("yyy年MM月dd日", c));
+                        }
+                    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                    dialog.show();
+                }
+            }
+        });
     }
 
     private void groupAdd() {
@@ -327,7 +377,7 @@ public class EventAddActivity extends UserInfoActivity {
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b){
+                    if (b) {
                         System.out.println(checkBox.getText().toString());
                         System.out.println(checkBoxs.get(1).getText().toString());
                         System.out.println(checkBoxs.get(1).isChecked());
@@ -360,7 +410,6 @@ public class EventAddActivity extends UserInfoActivity {
 
     private void feedback() {
         datesFeedback = new ArrayList<String>();
-        datesFeedback.add("请选择");
         datesFeedback.add("Y");
         datesFeedback.add("N");
     }
@@ -423,5 +472,96 @@ public class EventAddActivity extends UserInfoActivity {
                 commitInfo();
             }
         });
+//        event_bt_accessory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                int permissionCheck = ContextCompat.checkSelfPermission(EventAddActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+//                System.out.println(permissionCheck+"+++++"+PackageManager.PERMISSION_GRANTED);
+//                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(
+//                            EventAddActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+//                } else {
+//                    startActivityForResult(intent, IMAGE_REQUEST_CODE);
+//                }
+//            }
+//        });
+
+    }
+
+    private void clearData() {
+        event_et_lssue_date.setText("");
+        event_et_containment_date.setText("");
+        event_et_Action_plan_date.setText("");
+        event_spc_name_select.setText("");
+        event_et_order_no.setText("");
+        event_hawb.setText("");
+        event_part_information.setText("");
+        event_scheduled_delivery_time.setText("");
+        event_actual_delivery_time.setText("");
+        event_problem_statement.setText("");
+        event_recovery_description.setText("");
+        event_root_cause.setText("");
+        event_corrective_action.setText("");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK
+                && null != data) {
+            Uri selectedImage = data.getData();
+            Log.v("************:", "image" + selectedImage);
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            Log.v("picture path", picturePath);
+            cursor.close();
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+
+
+        }
+    }
+
+    public void selectPicture(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        Log.v("++++", permissionCheck + "");
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        } else {
+            startActivityForResult(intent, IMAGE_REQUEST_CODE);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+        }
     }
 }

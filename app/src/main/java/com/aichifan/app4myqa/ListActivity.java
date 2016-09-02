@@ -11,20 +11,20 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     public static final String HOST = "http://139.196.56.98:8080/myQA";
     private EventFragment eventFragment;
     /**
-     * 用于展示联系人的Fragment
+     * 用于展示事件的Fragment
      */
     private SystemFragment systemFragment;
     /**
-     * 用于展示动态的Fragment
+     * 用于展示系统的Fragment
      */
 
     private View eventLayout;
     /**
-     * 联系人界面布局
+     * 事件界面布局
      */
     private View systemLayout;
     /**
-     * 动态界面布局
+     * 系统界面布局
      */
     private FragmentManager fragmentManager;
     @Override
@@ -44,14 +44,16 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         systemLayout.setOnClickListener(this);
     }
 
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.event_layout:
-                // 当点击了消息tab时，选中第1个tab
+                // 当点击了事件tab时，选中第1个tab
                 setTabSelection(0);
                 break;
             case R.id.system_layout:
-                // 当点击了联系人tab时，选中第2个tab
+                // 当点击了系统tab时，选中第2个tab
                 setTabSelection(1);
                 break;
             default:
@@ -62,7 +64,7 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
      * 根据传入的index参数来设置选中的tab页。
      *
      * @param index
-     * 每个tab页对应的下标。0表示消息，1表示联系人，2表示动态，3表示设置。
+     * 每个tab页对应的下标。0表示事件，1表示系统
      */
     private void setTabSelection(int index) {
         // 每次选中之前先清楚掉上次的选中状态
@@ -75,23 +77,22 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
             case 0:
                 eventLayout.setBackgroundColor(0xffffffff);
                 if (eventFragment == null) {
-                    // 如果MessageFragment为空，则创建一个并添加到界面上
+                    // 如果eventFragment为空，则创建一个并添加到界面上
                     eventFragment = new EventFragment();
                     transaction.add(R.id.content,eventFragment);
                 } else {
-                    // 如果MessageFragment不为空，则直接将它显示出来
+                    // 如果eventFragment不为空，则直接将它显示出来
                     transaction.show(eventFragment);
                 }
                 break;
             case 1:
-                // 当点击了联系人tab时，改变控件的图片和文字颜色
                 systemLayout.setBackgroundColor(0xffffffff);
                 if (systemFragment == null) {
-                    // 如果ContactsFragment为空，则创建一个并添加到界面上
+                    // 如果systemFragment为空，则创建一个并添加到界面上
                     systemFragment = new SystemFragment();
                     transaction.add(R.id.content, systemFragment);
                 } else {
-                    // 如果ContactsFragment不为空，则直接将它显示出来
+                    // 如果systemFragment不为空，则直接将它显示出来
                     transaction.show(systemFragment);
                 }
                 break;

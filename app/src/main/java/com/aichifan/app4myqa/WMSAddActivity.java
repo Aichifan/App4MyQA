@@ -21,6 +21,7 @@ import com.aichifan.app4myqa.pojo.Question;
 import com.aichifan.app4myqa.pojo.User;
 import com.aichifan.app4myqa.util.ConductorUtils;
 import com.aichifan.app4myqa.util.MyUrlUtil;
+import com.aichifan.app4myqa.vagerview.NiceSpinner;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -43,6 +44,10 @@ public class WMSAddActivity extends UserInfoActivity {
     User conductor ;
     Date startdata ;
     Date enddata ;
+    ArrayAdapter<String>cityadapter ;
+    private Spinner snquestiontype;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,7 +159,12 @@ public class WMSAddActivity extends UserInfoActivity {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                  IdText idText=cityarr[i] ;
-                                city=new City() ;
+                                Log.v("idText",idText.getId()) ;
+                                if(idText!=null) {
+                                    city=new City() ;
+                                    city.setId(new Integer(idText.getId()));
+                                    city.setName(idText.getText());
+                                }
                             }
 
                             @Override
@@ -162,13 +172,15 @@ public class WMSAddActivity extends UserInfoActivity {
 
                             }
                         });
-                        ArrayAdapter<String>cityadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,citynames) ;
+                        cityadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,citynames) ;
                         sncity.setAdapter(cityadapter);
                         final Spinner snproject= (Spinner) findViewById(R.id.sp_program);
+
                         snproject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                 project=snproject.getSelectedItem().toString() ;
+
+                                project=snproject.getSelectedItem().toString() ;
                             }
 
                             @Override
@@ -178,7 +190,8 @@ public class WMSAddActivity extends UserInfoActivity {
                         });
                         ArrayAdapter<String>projectadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,projectnames) ;
                         snproject.setAdapter(projectadapter);
-                        final Spinner snquestiontype= (Spinner) findViewById(R.id.sp_questiontype);
+
+                        snquestiontype= (Spinner) findViewById(R.id.sp_questiontype);
                         snquestiontype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -219,15 +232,16 @@ public class WMSAddActivity extends UserInfoActivity {
             }
         }).start();
     }
+    Question question=new Question() ;
     public void sumbitQuestion(View view)
     {
+
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 ObjectMapper objectMapper=new ObjectMapper() ;
                 try {
-                    Question question=new Question() ;
                     question.setCategory("WMS");
                     question.setProject(project);
                     question.setCity(city);
@@ -242,6 +256,7 @@ public class WMSAddActivity extends UserInfoActivity {
                     question.setHandler(conductor);
                     question.setStartdate(startdata);
                     question.setPromisedate(enddata);
+
                     InputStream is=MyUrlUtil.requestByUrl(MainActivity.HOST+"/question/create","POST",objectMapper.writeValueAsString(question)) ;
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
@@ -250,6 +265,13 @@ public class WMSAddActivity extends UserInfoActivity {
         }).start();
     }
     public void resetQuestion(View view)
+    {
+        ((EditText)findViewById(R.id.ed_email)).setText(null);
+        ((EditText)findViewById(R.id.ed_describequestion)).setText(null);
+        ((EditText)findViewById(R.id.ed_starttime)).setText(null);
+        ((EditText)findViewById(R.id.ed_starttime)).setText(null);
+    }
+    public void postAttchment(View view)
     {
 
     }
