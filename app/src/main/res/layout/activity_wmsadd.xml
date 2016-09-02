@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".WMSAddActivity">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/stub">
     <ViewStub
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,9 +17,11 @@
         android:inflatedId="@+id/header"
         android:layout="@layout/header"/>
 
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/stub">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,7 +33,7 @@
         android:textSize="25dp"
         android:gravity="center"
         android:id="@+id/title"
-        android:background="@color/colorLabelBackground"/>
+        android:background="@color/colorLabelBackground" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="25dp"
