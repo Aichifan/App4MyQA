@@ -9,10 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.aichifan.app4myqa.MainActivity">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/management"
-        android:background="@color/dark_blue"
+        android:background="@color/violet"
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
@@ -48,15 +48,14 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:textSize="21dp"
-        style="@style/BeatBoxButtonStrong"
         android:id="@+id/loginBtn"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="140dp"
+        android:background="@color/soothing_blue"
         android:onClick="loginClick"/>
 
 </RelativeLayout>

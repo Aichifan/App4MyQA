@@ -26,18 +26,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class QuestionActivity extends AppCompatActivity {
+public class WMSAddActivity extends UserInfoActivity {
 
     String scaleofproblem ;
     City city ;
@@ -52,16 +49,19 @@ public class QuestionActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_wmsadd);
+
+        setHeader(getString(R.string.WMSAddActivityTitle), true, true);
+
         final EditText startText= (EditText) findViewById(R.id.ed_starttime);
         final EditText endText= (EditText) findViewById(R.id.ed_endtime);
         final Calendar c = Calendar.getInstance();
         startText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(QuestionActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dialog = new DatePickerDialog(WMSAddActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar c = Calendar.getInstance();
@@ -76,7 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
         endText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog=new DatePickerDialog(QuestionActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dialog=new DatePickerDialog(WMSAddActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)  {
                         Calendar c = Calendar.getInstance();
@@ -172,7 +172,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                             }
                         });
-                        cityadapter=new ArrayAdapter<String>(QuestionActivity.this,android.R.layout.simple_spinner_item,citynames) ;
+                        cityadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,citynames) ;
                         sncity.setAdapter(cityadapter);
                         final Spinner snproject= (Spinner) findViewById(R.id.sp_program);
 
@@ -188,7 +188,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                             }
                         });
-                        ArrayAdapter<String>projectadapter=new ArrayAdapter<String>(QuestionActivity.this,android.R.layout.simple_spinner_item,projectnames) ;
+                        ArrayAdapter<String>projectadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,projectnames) ;
                         snproject.setAdapter(projectadapter);
 
                         snquestiontype= (Spinner) findViewById(R.id.sp_questiontype);
@@ -203,7 +203,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                             }
                         });
-                        ArrayAdapter<String>questiontypeadapter=new ArrayAdapter<String>(QuestionActivity.this,android.R.layout.simple_spinner_item,questiontypenames) ;
+                        ArrayAdapter<String>questiontypeadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,questiontypenames) ;
                         snquestiontype.setAdapter(questiontypeadapter);
                         final Spinner snscaleofproblem= (Spinner) findViewById(R.id.sp_scaleofproblem);
                         snscaleofproblem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -222,10 +222,10 @@ public class QuestionActivity extends AppCompatActivity {
 
                             }
                         });
-                        ArrayAdapter<String>scaleofproblemadapter=new ArrayAdapter<String>(QuestionActivity.this,android.R.layout.simple_spinner_item,scaleofproblemnames) ;
+                        ArrayAdapter<String>scaleofproblemadapter=new ArrayAdapter<String>(WMSAddActivity.this,android.R.layout.simple_spinner_item,scaleofproblemnames) ;
                         snscaleofproblem.setAdapter(scaleofproblemadapter);
-                        emailgroupID=GroupUtils.setAdapter(R.id.sp_emailgroup,QuestionActivity.this,android.R.layout.simple_spinner_item,emailgroupnames,grouparr);
-                        conductor=ConductorUtils.setAdapter(R.id.sp_conductor,QuestionActivity.this,android.R.layout.simple_spinner_item,conductornames,conductorarr);
+                        emailgroupID=GroupUtils.setAdapter(R.id.sp_emailgroup,WMSAddActivity.this,android.R.layout.simple_spinner_item,emailgroupnames,grouparr);
+                        conductor=ConductorUtils.setAdapter(R.id.sp_conductor,WMSAddActivity.this,android.R.layout.simple_spinner_item,conductornames,conductorarr);
                     }
                 });
 

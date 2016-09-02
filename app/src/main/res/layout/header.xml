@@ -2,46 +2,37 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/soothing_blue">
 
-    <LinearLayout
-        android:id="@+id/panelIconLeft"
-        android:layout_width="wrap_content"
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="5dp" >
-
-        <Button
-            android:id="@+id/btnHome"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/HomeActivityTitle"
-            android:onClick="btnHomeClick" />
-    </LinearLayout>
+        android:text="@string/HomeActivityTitle"
+        android:textSize="18dp"
+        android:onClick="btnHomeClick"
+        android:background="@drawable/button_beat_box"
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textHeading"
         android:text=""
-        android:textSize="36dp"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="30dp"
+        android:layout_centerInParent="true"/>
 
-    <LinearLayout
-        android:id="@+id/panelIconRight"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnFeedback"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:text="@string/FeedbackActivityTitle"
+        android:textSize="18dp"
+        android:onClick="btnFeedbackClick"
+        android:background="@drawable/button_beat_box"
         android:layout_centerVertical="true"
-        android:layout_margin="5dp" >
-
-        <Button
-            android:id="@+id/btnFeedback"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/FeedbackActivityTitle"
-            android:onClick="btnFeedbackClick" />
-    </LinearLayout>
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

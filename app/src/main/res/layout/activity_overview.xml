@@ -11,7 +11,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/stubHeader"
         android:inflatedId="@+id/header"
-        android:layout="@layout/header"/>
+        android:layout="@layout/header" />
+    <android.support.v4.view.ViewPager
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewpager">
+        <android.support.v4.view.PagerTabStrip
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/tabStrip"
+            android:background="@color/colorLabelBackground">
+        </android.support.v4.view.PagerTabStrip>
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>
 

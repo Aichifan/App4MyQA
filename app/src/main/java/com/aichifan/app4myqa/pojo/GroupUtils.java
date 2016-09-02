@@ -1,15 +1,13 @@
 package com.aichifan.app4myqa.pojo;
 
-import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.aichifan.app4myqa.QuestionActivity;
+import com.aichifan.app4myqa.WMSAddActivity;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +33,7 @@ public class GroupUtils {
         return arr ;
     }
    static public Integer groupID ;
-    public static Integer setAdapter(int layout , QuestionActivity activity , int itemlayout , final ArrayList<String>arr, final Group[]groups)
+    public static Integer setAdapter(int layout , WMSAddActivity activity , int itemlayout , final ArrayList<String>arr, final Group[]groups)
     {
         final Spinner sn= (Spinner) activity.findViewById(layout);
 
