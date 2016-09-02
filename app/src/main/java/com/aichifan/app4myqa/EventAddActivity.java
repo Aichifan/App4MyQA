@@ -241,7 +241,7 @@ public class EventAddActivity extends UserInfoActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日    HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
         String str1 = formatter.format(curDate);
-        question.setPartInformation(str1 + " 来自 " + shijianchuo + "\n" + event_part_information.getText().toString());
+        question.setPartInformation(str1 + " 来自 " + MainActivity.user.getUsername() + "\n" + event_part_information.getText().toString());
 
         sim = new SimpleDateFormat("yyy年MM月dd日");
         try {
