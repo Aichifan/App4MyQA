@@ -105,7 +105,7 @@ public class EventAddActivity extends UserInfoActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                moginMoni();
+//                moginMoni();
 
                 projectName("/dict/projects");
                 supplier("/dict/suppliers");
@@ -137,22 +137,7 @@ public class EventAddActivity extends UserInfoActivity {
         }).start();
     }
 
-    private void moginMoni() {
-        InputStream is = MyUrlUtil.moniLogin("cuiyuanhang", "1234");
-        BufferedReader isb = new BufferedReader(new InputStreamReader(is));
-        StringBuffer sb = new StringBuffer();
-        String line = null;
-        try {
-            while ((line = isb.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println(sb);
-        shijianchuo = sb.toString();
-    }
 
     private void commit(String s, String s1, String s2) {
         InputStream is = MyUrlUtil.requestByUrl(MainActivity.HOST + s, s1, s2);

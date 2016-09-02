@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".OverviewActivity" />
+        <activity android:name=".ListActivity" />
         <activity android:name=".EventAddActivity" />
         <activity android:name=".WMSAddActivity" />
         <activity android:name=".TMSManageActivity" />
