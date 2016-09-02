@@ -206,7 +206,7 @@
         android:layout_height="25dp"
         android:layout_toRightOf="@+id/emailgroup"
         android:layout_marginLeft="10dp"
-        android:layout_below="@+id/ed_endtime"
+        android:layout_below="@+id/email"
         android:layout_marginTop="25dp"
         android:entries="@array/pro"
         android:id="@+id/sp_emailgroup"
