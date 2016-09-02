@@ -15,7 +15,6 @@ import com.aichifan.app4myqa.vo.LoginAccount;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
-
 public class MainActivity extends AppCompatActivity {
     public static final String HOST = "http://139.196.56.98:8080/myQA";
     public ImageView mImageView;
