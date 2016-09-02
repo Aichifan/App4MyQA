@@ -109,7 +109,6 @@ public class WMSAddActivity extends UserInfoActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //MyUrlUtil.moniLogin("zhanghao","1234");
                 InputStream iscity= MyUrlUtil.requestByUrl(MainActivity.HOST+"/dict/cities","GET",null) ;
                 InputStream isprojects=MyUrlUtil.requestByUrl(MainActivity.HOST+"/dict/projects","GET",null) ;
                 InputStream isquestiontype=MyUrlUtil.requestByUrl(MainActivity.HOST+"/dict/types/ms","GET",null) ;
