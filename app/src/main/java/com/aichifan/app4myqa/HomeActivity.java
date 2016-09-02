@@ -17,7 +17,7 @@ public class HomeActivity extends UserInfoActivity {
 
         switch (view.getId()) {
             case R.id.overViewBtn:
-                intent = new Intent(this, OverviewActivity.class);
+                intent = new Intent(this, ListActivity.class);
                 startActivity(intent);
                 break;
 
