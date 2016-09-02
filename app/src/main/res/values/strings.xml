@@ -52,4 +52,13 @@
     <string name="attchment_name">附件</string>
     <string name="submit_name">提交</string>
     <string name="reset_name">重置</string>
+    <string-array name="num_from">
+        <item>10</item>
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
