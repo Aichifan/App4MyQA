@@ -7,11 +7,259 @@
     tools:context="com.aichifan.app4myqa.TMSManageActivity">
 
     <ViewStub
+        android:id="@+id/stubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/stubHeader"
         android:inflatedId="@+id/header"
-        android:layout="@layout/header"/>
+        android:layout="@layout/header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tms_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_project"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/tms_project_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/tms_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_city"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/tms_city_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/tms_problem_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_problem_type"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/tms_problem_type_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/tms_project_lunch_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_project_lunch_time"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+
+                    android:id="@+id/tms_et_project_lunch_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tms_to_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="要求结束时间"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+
+                    android:id="@+id/tms_et_to_end_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_mail_man"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/tms_et_mail_man"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/mail_man" />
+
+            <TextView
+                android:id="@+id/tms_mail_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_mail_group"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/tms_mail_group_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/tms_problem_severity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_problem_severity"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/tms_problem_severity_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/tms_deal_with"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/tms_deal_with"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/tms_deal_with_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_problem_statement"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/tms_problem_statement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="left|top"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/event_problem_statement"
+                android:minHeight="150dp"
+                android:padding="5dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tms_tv_accessory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/event_accessory"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/tms_bt_accessory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tms_tv_accessory"
+                    android:background="@drawable/bg_button_accessory"
+                    android:padding="10dp"
+                    android:text="+Select files..."
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/tms_bt_commit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button_commit"
+                    android:text="提交"
+                    android:textColor="#ffffff"
+                    />
+                <Button
+                    android:id="@+id/tms_bt_reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tms_bt_commit"
+                    android:layout_marginLeft="10dp"
+                    android:text="重置"
+                    android:background="#ffffff"
+                    android:textColor="#000000"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
 

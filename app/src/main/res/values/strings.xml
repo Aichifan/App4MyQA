@@ -61,4 +61,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tms_project">项目</string>
+    <string name="tms_city">城市</string>
+    <string name="tms_problem_type">问题类型</string>
+    <string name="tms_project_lunch_time">项目发起时间</string>
+    <string name="tms_mail_man">邮件人</string>
+    <string name="mail_man">Email</string>
+    <string name="tms_mail_group">邮件组</string>
+    <string name="tms_problem_severity">问题严重性</string>
+    <string name="tms_deal_with">处理</string>
 </resources>

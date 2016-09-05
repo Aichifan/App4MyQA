@@ -26,7 +26,8 @@
             android:layout_marginTop="16dp"
             android:layout_weight="1">
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/overViewBtn"
                 android:text="@string/OverviewActivityTitle"
@@ -36,7 +37,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/caseHandBtn"
                 android:text="@string/CaseHandActivityTitle"
@@ -46,7 +48,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/SysAdminBtn"
                 android:text="@string/SystemAdministratorActivityTitle"
@@ -64,7 +67,8 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventManageBtn"
                 android:text="@string/EventAddActivityTitle"
@@ -74,7 +78,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/wmsManageBtn"
                 android:text="@string/WMSAddActivityTitle"
@@ -84,7 +89,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/tmsManageBtn"
                 android:text="@string/TMSManageActivityTitle"
@@ -102,7 +108,8 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventClosedBtn"
                 android:text="@string/EventClosedActivityTitle"
@@ -112,7 +119,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/wmsClosedBtn"
                 android:text="@string/WMSClosedActivityTitle"
@@ -122,7 +130,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/tmsClosedBtn"
                 android:text="@string/TMSClosedActivityTitle"
@@ -140,7 +149,8 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventHistoryBtn"
                 android:text="@string/EventHistoricalActivityTitle"
@@ -150,7 +160,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/wmsHistoryBtn"
                 android:text="@string/WMSHistoricalActivityTitle"
@@ -160,7 +171,8 @@
                 android:onClick="onButtonClick"
                 android:background="@drawable/button_beat_box"/>
             <Button
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/tmsHistoryBtn"
                 android:text="@string/TMSHistoricalActivityTitle"
