@@ -80,7 +80,6 @@
                 android:focusableInTouchMode="true">
 
                 <EditText
-
                     android:id="@+id/tms_et_project_lunch_time"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -228,6 +227,7 @@
                     android:padding="10dp"
                     android:text="+Select files..."
                     android:textColor="#ffffff"
+                    android:onClick="onTmsClick"
                     android:textSize="15dp"
                     />
 
@@ -246,6 +246,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_button_commit"
                     android:text="提交"
+                    android:onClick="onTmsClick"
                     android:textColor="#ffffff"
                     />
                 <Button
@@ -256,6 +257,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="重置"
                     android:background="#ffffff"
+                    android:onClick="onTmsClick"
                     android:textColor="#000000"/>
             </RelativeLayout>
         </LinearLayout>

@@ -21,15 +21,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorLabelBackground"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/event_add"
-                android:textSize="20dp" />
-
-            <TextView
                 android:id="@+id/event_project_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -5,8 +5,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +26,7 @@ import android.widget.TextView;
 import com.aichifan.app4myqa.pojo.City;
 import com.aichifan.app4myqa.pojo.ProjectName;
 import com.aichifan.app4myqa.pojo.Question;
+import com.aichifan.app4myqa.pojo.QuestionAttachment;
 import com.aichifan.app4myqa.pojo.User;
 import com.aichifan.app4myqa.util.MyUrlUtil;
 import com.aichifan.app4myqa.vagerview.NiceSpinner;
@@ -36,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -45,6 +44,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by mic on 2016/8/30.
@@ -79,6 +85,7 @@ public class EventAddActivity extends UserInfoActivity {
     private EditText event_actual_delivery_time;
     private List<Integer> lists;
     private List<Integer> ids;
+    private List<QuestionAttachment> questionAttachments;
 
     private EditText event_spc_name_select;
     private EditText event_et_order_no;
@@ -94,6 +101,7 @@ public class EventAddActivity extends UserInfoActivity {
     private Button event_bt_commit;
 
     private String shijianchuo;
+    private String picturePath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -254,6 +262,9 @@ public class EventAddActivity extends UserInfoActivity {
         question.setDescription(event_recovery_description.getText().toString());
         question.setRootCause(event_root_cause.getText().toString());
         question.setCorrectiveAction(event_corrective_action.getText().toString());
+        if (questionAttachments!=null) {
+            question.setAttachmentList(questionAttachments);
+        }
         clearData();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -439,6 +450,7 @@ public class EventAddActivity extends UserInfoActivity {
         event_bt_commit = (Button) findViewById(R.id.event_bt_commit);
         lists = new ArrayList<Integer>();
         ids = new ArrayList<Integer>();
+        questionAttachments = new ArrayList<QuestionAttachment>();
 
         event_bt_commit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -478,10 +490,42 @@ public class EventAddActivity extends UserInfoActivity {
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
+            picturePath = cursor.getString(columnIndex);
             Log.v("picture path", picturePath);
-            cursor.close();
-            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    OkHttpClient client = new OkHttpClient();
+                    File file = new File(picturePath);
+                    MultipartBody body =  new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("Filedata", file.getName(),
+                                    RequestBody.create(MediaType.parse("text/plain"), file))
+                            .build();
+
+                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").post(body).build();
+                    Response response = null;
+                    try {
+                        response = client.newCall(request).execute();
+//                        Log.v("return body", response.body().string());
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        QuestionAttachment questionAttachment = null;
+                        try {
+                            questionAttachment = objectMapper.readValue(response.body().string(), QuestionAttachment.class);
+                            questionAttachments.add(questionAttachment);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }).start();
         }
     }
 
