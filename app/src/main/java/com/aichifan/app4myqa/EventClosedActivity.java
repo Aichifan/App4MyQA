@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +20,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.aichifan.app4myqa.adapter.attachmentAdapter;
 import com.aichifan.app4myqa.pojo.City;
 import com.aichifan.app4myqa.pojo.ProjectName;
 import com.aichifan.app4myqa.pojo.Question;
@@ -42,6 +46,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -51,7 +56,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class EventClosedActivity extends UserInfoActivity {
+public class EventClosedActivity extends UserInfoActivity implements attachmentAdapter.Callback{
     private static final int IMAGE_REQUEST_CODE = 0;
     private NiceSpinner event_project_name_select;
     private NiceSpinner event_supplier_select;
@@ -96,10 +101,14 @@ public class EventClosedActivity extends UserInfoActivity {
     private List<String> datesSeverity;
     private List<String> datesProvenace;
     private String picturePath;
+    private String number;
+    private LinearLayout event_ll_down;
+    private ListView event_lv_attachment;
+    private attachmentAdapter adapter;
 
-    private int id;
+    private int id = 0;
 
-    private List<QuestionAttachment> questionAttachments;
+    private  List<QuestionAttachment> questionAttachments;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -252,13 +261,20 @@ public class EventClosedActivity extends UserInfoActivity {
         event_bt_accessory = (Button) findViewById(R.id.event_bt_accessory);
         event_bt_commit = (Button) findViewById(R.id.event_bt_commit);
 
-        lists = new ArrayList<Integer>();
-        ids = new ArrayList<String>();
-        names = new ArrayList<String>();
         checkBoxs = new ArrayList<CheckBox>();
         datesFeedback = new ArrayList<String>();
         datesProject = new ArrayList<String>();
         checkBoxId = new ArrayList<Integer>();
+        event_ll_down = (LinearLayout) findViewById(R.id.event_ll_down);
+        event_lv_attachment = (ListView) findViewById(R.id.event_lv_attachment);
+
+        Intent intent = getIntent();
+        if (intent!=null) {
+            number = intent.getStringExtra("bianhao");
+            event_close_bynumber.setText(number);
+            search();
+        }
+
     }
 
     public void onCloseClick(View view) {
@@ -277,22 +293,38 @@ public class EventClosedActivity extends UserInfoActivity {
 
     private void commit(String s, String s1, String s2) {
         InputStream is = MyUrlUtil.requestByUrl(MainActivity.HOST + s, s1, s2);
-        BufferedReader isb = new BufferedReader(new InputStreamReader(is));
-        StringBuffer sb = new StringBuffer();
-        String line = null;
-        try {
-            while ((line = isb.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println(sb);
+        if (is!=null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(EventClosedActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
+                }
+            });
+            BufferedReader isb = new BufferedReader(new InputStreamReader(is));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            try {
+                while ((line = isb.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(sb);
+        }else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(EventClosedActivity.this,"上传失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void commitInfo() {
-        question = new Question();
+//        question = new Question();
         question.setCategory("PM");
         if (event_project_name_select.getText().toString().equals("请选择")) {
             question.setProject("");
@@ -317,10 +349,10 @@ public class EventClosedActivity extends UserInfoActivity {
         if (event_feedback_select.getText().toString().equals("Y")) {
             question.setIsCFeedback(true);
         } else {
-            System.out.println("+++++++++++");
             question.setIsCFeedback(false);
         }
 
+        checkBoxId.clear();
         for (int i = 0; i < checkBoxs.size(); i++) {
             if (checkBoxs.get(i).isChecked()) {
                 checkBoxId.add(lists.get(i));
@@ -394,7 +426,13 @@ public class EventClosedActivity extends UserInfoActivity {
         question.setCorrectiveAction(event_corrective_action.getText().toString());
         if (questionAttachments!=null) {
             question.setAttachmentList(questionAttachments);
+
         }
+
+        if (questionAttachments.size() == 0){
+            question.setAttachmentList(null);
+        }
+
         clean();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -403,7 +441,7 @@ public class EventClosedActivity extends UserInfoActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    commit("/question/close/"+String.valueOf(id), "PUT", str);
+                    commit("/question/update", "POST", str);
                 }
             }).start();
 
@@ -487,13 +525,15 @@ public class EventClosedActivity extends UserInfoActivity {
                                     RequestBody.create(MediaType.parse("text/plain"), file))
                             .build();
 
-                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").post(body).build();
+                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").addHeader("Cookie",
+                            TextUtils.join(";",  MyUrlUtil.msCookieManager.getCookieStore().getCookies())).post(body).build();
                     Response response = null;
                     try {
                         response = client.newCall(request).execute();
 //                        Log.v("return body", response.body().string());
                         ObjectMapper objectMapper = new ObjectMapper();
                         QuestionAttachment questionAttachment = null;
+
                         try {
                             questionAttachment = objectMapper.readValue(response.body().string(), QuestionAttachment.class);
                             questionAttachments.add(questionAttachment);
@@ -501,7 +541,26 @@ public class EventClosedActivity extends UserInfoActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (questionAttachments!=null){
+                                    event_ll_down.setVisibility(View.VISIBLE);
+                                    if(adapter==null){
+                                        adapter = new attachmentAdapter(getApplicationContext(),questionAttachments,EventClosedActivity.this);
+                                        event_lv_attachment.setAdapter(adapter);
+                                    }else {
+//                                    attachmentAdapter.questionAttachments = questionAttachments;
+                                        Log.v("+++++++",adapter.getCount()+"");
+                                        adapter.notifyDataSetChanged();
+                                        if (adapter.getCount() == 0){
+                                            event_ll_down.setVisibility(View.GONE);
+                                        }
+                                    }
+//
+                                }
+                            }
+                        });
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -543,6 +602,7 @@ public class EventClosedActivity extends UserInfoActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (question!=null)
                                 id = question.getId();
                                 if (question.getProject()!=null)
                                 event_project_name_select.setText(question.getProject());
@@ -558,11 +618,18 @@ public class EventClosedActivity extends UserInfoActivity {
                                 event_feedback_select.setText(question.getFeedback());
                                 
                                 Gson gson = new Gson();
+                                ids = new ArrayList<String>();
+                                names = new ArrayList<String>();
 
                                 ids = gson.fromJson(question.getTeammates(), new TypeToken<List<String>>(){}.getType());
+
                                 if (ids!=null) {
+                                    HashSet h = new HashSet(ids);
+                                    ids.clear();
+                                    ids.addAll(h);
                                     for (int i = 0; i < ids.size(); i++) {
-                                        for (int j = 0; j < lists.size(); j++) {
+                                        int j = 0;
+                                        for ( j = 0; j < lists.size(); j++) {
                                             if (Integer.parseInt(ids.get(i).toString()) == lists.get(j)) {
                                                 names.add(datesGroup.get(i));
                                             }
@@ -618,6 +685,29 @@ public class EventClosedActivity extends UserInfoActivity {
                                 if (question.getCorrectiveAction()!=null)
                                 event_corrective_action.setText(question.getCorrectiveAction());
 
+                                if (question.getAttachmentList()!=null) {
+
+                                    questionAttachments = new ArrayList<QuestionAttachment>();
+//                                    questionAttachments.clear();
+                                    questionAttachments.addAll(question.getAttachmentList());
+                                    System.out.println(question.getAttachmentList());
+                                    if (questionAttachments.size()!=0) {
+                                        event_ll_down.setVisibility(View.VISIBLE);
+                                            adapter = new attachmentAdapter(getApplicationContext(), questionAttachments,EventClosedActivity.this);
+                                            event_lv_attachment.setAdapter(adapter);
+
+//                                            adapter.notifyDataSetChanged();
+                                            if (adapter.getCount() == 0) {
+
+                                                event_ll_down.setVisibility(View.GONE);
+                                            }
+
+//
+                                    }
+                                }else{
+                                    Log.v("attachment","is null");
+                                }
+
                             }
                         });
                     }
@@ -638,9 +728,22 @@ public class EventClosedActivity extends UserInfoActivity {
         }
         city = projectNames[0].getCity();
         datesGroup = new ArrayList<String>();
+        lists = new ArrayList<Integer>();
         for (int i = 0; i < projectNames.length; i++) {
             datesGroup.add(projectNames[i].getUsername().toString().trim());
             lists.add(projectNames[i].getId());
         }
+    }
+
+    @Override
+    public void click(View v) {
+        Log.v("+++++i",v.getTag()+"");
+        int posi = (int) v.getTag();
+        questionAttachments.remove(posi);
+        if (adapter.getCount() == 0) {
+
+            event_ll_down.setVisibility(View.GONE);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

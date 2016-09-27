@@ -2,6 +2,7 @@ package com.aichifan.app4myqa.util;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.aichifan.app4myqa.MainActivity;
 import com.aichifan.app4myqa.vo.LoginAccount;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -24,7 +26,8 @@ import java.util.Map;
 public class MyUrlUtil {
 
     static final String COOKIES_HEADER = "Set-Cookie";
-    static java.net.CookieManager msCookieManager = new java.net.CookieManager();
+    public static java.net.CookieManager msCookieManager = new java.net.CookieManager();
+
     /**
      * 访问url获取数据流
      * @param urlStr 链接
@@ -45,6 +48,10 @@ public class MyUrlUtil {
                 //While joining the Cookies, use ',' or ';' as needed. Most of the server are using ';'
                 conn.setRequestProperty("Cookie",
                         TextUtils.join(";",  msCookieManager.getCookieStore().getCookies()));
+
+
+
+
             }
             //如果有参数，默认是json格式数据提交
             if(!TextUtils.isEmpty(params)) {
@@ -64,14 +71,18 @@ public class MyUrlUtil {
                 if(msCookieManager.getCookieStore().getCookies().size() == 0) {
                     Map<String, List<String>> headerFields = conn.getHeaderFields();
                     List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+                    Log.v("++++1",cookiesHeader.size()+"");
                     if (cookiesHeader != null) {
                         for (String cookie : cookiesHeader) {
+                            Log.v("++++2",cookie);
                             msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
                         }
                     }
                 }
+
                 return conn.getInputStream();
             }
+            Log.v("++++",conn.getResponseCode()+"");
         } catch(MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -11,13 +11,17 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
+import com.aichifan.app4myqa.adapter.attachmentAdapter;
 import com.aichifan.app4myqa.pojo.City;
 import com.aichifan.app4myqa.pojo.Group;
 import com.aichifan.app4myqa.pojo.ProjectName;
@@ -50,7 +54,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class TMSManageActivity extends UserInfoActivity {
+public class TMSManageActivity extends UserInfoActivity implements attachmentAdapter.Callback{
     private static final int IMAGE_REQUEST_CODE = 1;
     private NiceSpinner tms_project_select;
     private NiceSpinner tms_city_select;
@@ -83,6 +87,9 @@ public class TMSManageActivity extends UserInfoActivity {
     private SimpleDateFormat sim;
     private List<QuestionAttachment> questionAttachments;
     private String picturePath;
+    private LinearLayout event_ll_down;
+    private ListView event_lv_attachment;
+    private attachmentAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -252,16 +259,19 @@ public class TMSManageActivity extends UserInfoActivity {
         tms_bt_accessory = (Button) findViewById(R.id.tms_bt_accessory);
         tms_bt_commit = (Button) findViewById(R.id.tms_bt_commit);
         tms_bt_reset = (Button) findViewById(R.id.tms_bt_reset);
+        event_ll_down = (LinearLayout) findViewById(R.id.event_ll_down);
+
 
         questionAttachments = new ArrayList<QuestionAttachment>();
+        event_lv_attachment = (ListView) findViewById(R.id.event_lv_attachment);
     }
 
-    public void onTmsClick(View view){
-        switch (view.getId()){
+    public void onTmsClick(View view) {
+        switch (view.getId()) {
             case R.id.tms_bt_accessory:
                 selectPicture();
                 break;
-            case  R.id.tms_bt_commit:
+            case R.id.tms_bt_commit:
                 commitInfo();
                 break;
             case R.id.tms_bt_reset:
@@ -321,13 +331,14 @@ public class TMSManageActivity extends UserInfoActivity {
                 public void run() {
                     OkHttpClient client = new OkHttpClient();
                     File file = new File(picturePath);
-                    MultipartBody body =  new MultipartBody.Builder()
+                    MultipartBody body = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
                             .addFormDataPart("Filedata", file.getName(),
                                     RequestBody.create(MediaType.parse("text/plain"), file))
                             .build();
 
-                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").post(body).build();
+                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").addHeader("Cookie",
+                            TextUtils.join(";", MyUrlUtil.msCookieManager.getCookieStore().getCookies())).post(body).build();
                     Response response = null;
                     try {
                         response = client.newCall(request).execute();
@@ -345,13 +356,30 @@ public class TMSManageActivity extends UserInfoActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (questionAttachments!=null){
+                                event_ll_down.setVisibility(View.VISIBLE);
+                                if(adapter==null){
+                                    adapter = new attachmentAdapter(getApplicationContext(),questionAttachments,TMSManageActivity.this);
+                                    event_lv_attachment.setAdapter(adapter);
+                                }else {
+//                                    attachmentAdapter.questionAttachments = questionAttachments;
+                                    Log.v("+++++++",adapter.getCount()+"");
+                                    if (adapter.getCount() == 0){
+                                        event_ll_down.setVisibility(View.GONE);
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                }
+//
+                            }
+                        }
+                    });
                 }
             }).start();
         }
     }
-
     private void commitInfo() {
         question = new Question();
         question.setCategory("TMS");
@@ -361,7 +389,7 @@ public class TMSManageActivity extends UserInfoActivity {
             question.setProject(tms_project_select.getText().toString());
         }
         int i;
-        for(i = 0;i<datesCityText.size();i++){
+        for (i = 0; i < datesCityText.size(); i++) {
             if (tms_city_select.getText().toString().equals(datesCityText.get(i).toString()))
                 break;
         }
@@ -397,8 +425,8 @@ public class TMSManageActivity extends UserInfoActivity {
         if (tms_mail_group_select.getText().toString().equals("请选择")) {
             question.setGroup(null);
         } else {
-            for (int j = 0;j<groupList.size();j++) {
-                if (tms_mail_group_select.getText().toString().equals(groupList.get(j).getName())){
+            for (int j = 0; j < groupList.size(); j++) {
+                if (tms_mail_group_select.getText().toString().equals(groupList.get(j).getName())) {
                     question.setGroup(groupList.get(j));
                 }
             }
@@ -421,8 +449,11 @@ public class TMSManageActivity extends UserInfoActivity {
             }
         }
         question.setProblemStatement(tms_problem_statement.getText().toString());
-        if (questionAttachments!=null) {
+        if (questionAttachments != null) {
             question.setAttachmentList(questionAttachments);
+        }
+        if (questionAttachments.size()==0){
+            question.setAttachmentList(null);
         }
         reset();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -442,7 +473,7 @@ public class TMSManageActivity extends UserInfoActivity {
     }
 
     private void commit(String s, String post, String str) {
-        InputStream is = MyUrlUtil.requestByUrl(MainActivity.HOST + s,post, str);
+        InputStream is = MyUrlUtil.requestByUrl(MainActivity.HOST + s, post, str);
         BufferedReader isb = new BufferedReader(new InputStreamReader(is));
         StringBuffer sb = new StringBuffer();
         String line = null;
@@ -470,5 +501,17 @@ public class TMSManageActivity extends UserInfoActivity {
         tms_et_to_end_time.getText().clear();
         tms_et_mail_man.getText().clear();
         tms_problem_statement.getText().clear();
+    }
+
+    @Override
+    public void click(View v) {
+        Log.v("+++++i",v.getTag()+"");
+        int posi = (int) v.getTag();
+        questionAttachments.remove(posi);
+        if (adapter.getCount() == 0) {
+
+            event_ll_down.setVisibility(View.GONE);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

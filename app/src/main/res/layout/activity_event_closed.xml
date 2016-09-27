@@ -12,5 +12,580 @@
         android:id="@+id/stubHeader"
         android:inflatedId="@+id/header"
         android:layout="@layout/header"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+
+                    android:id="@+id/event_close_bynumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/search"
+                    android:background="@drawable/bg_edittext"
+                    android:hint="搜索编号"
+                    android:padding="5dp" />
+
+                <Button
+                    android:id="@+id/event_close_bt_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onCloseClick"
+                    android:text="搜索"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/event_project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_project_name"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/event_project_name_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/event_supplier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_supplier"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/event_supplier_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/event_lssue_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_lssue_date"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+
+                    android:id="@+id/event_et_lssue_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/event_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_feedback"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/event_feedback_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="请选择" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="*事件参与人："
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/event_tv_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/event_ll_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/containment_plan_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/containment_plan_date"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/event_et_containment_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="*改善方案期限(Action Plan Date) :"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/event_et_Action_plan_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_Issue_Type"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/event_issue_type_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="请选择" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_severity"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/event_severity_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="请选择" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/provenance_relating_info"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.NiceSpinner
+                android:id="@+id/event_provenace_info_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="请选择" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_spc_name"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_spc_name_select"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/event_spc_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_order_no"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_et_order_no"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="订单号"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_hawb"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_hawb"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/event_hawb"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_part_information"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_part_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left|top"
+                android:hint="@string/event_part_information"
+                android:minHeight="150dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_scheduled_delivery"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/event_scheduled_delivery_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_actual_delivery_time"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/event_actual_delivery_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/event_calendar" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_problem_statement"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_problem_statement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left|top"
+                android:hint="@string/event_problem_statement"
+                android:minHeight="150dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_recovery_description"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_recovery_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left|top"
+                android:hint="@string/event_recovery_description"
+                android:minHeight="150dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_root_cause"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_root_cause"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left|top"
+                android:hint="@string/event_root_cause"
+                android:minHeight="150dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/event_corrective_action"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/event_corrective_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left|top"
+                android:hint="@string/event_corrective_action"
+                android:minHeight="150dp"
+                android:padding="5dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/event_tv_accessory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/event_accessory"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/event_bt_accessory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/event_tv_accessory"
+                    android:background="@drawable/bg_button_accessory"
+                    android:onClick="onCloseClick"
+                    android:focusable="false"
+                    android:padding="10dp"
+                    android:text="+Select files..."
+                    android:textColor="#ffffff"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/event_ll_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000000" />
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="文件名" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="上传时间" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="大小" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="拥有人" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="操作" />
+                    </TableRow>
+                    <com.aichifan.app4myqa.vagerview.attachmentListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:divider="#00000000"
+                        android:dividerHeight="10dp"
+                        android:id="@+id/event_lv_attachment"/>
+                </TableLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000000" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/event_bt_commit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button_commit"
+                    android:onClick="onCloseClick"
+                    android:focusable="false"
+                    android:text="保存"
+                    android:textColor="#ffffff" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 

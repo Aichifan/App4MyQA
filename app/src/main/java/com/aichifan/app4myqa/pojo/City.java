@@ -5,7 +5,6 @@ public class City {
 
     private String name;
 
-
     public Integer getId() {
         return id;
     }

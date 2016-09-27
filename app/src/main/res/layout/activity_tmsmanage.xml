@@ -232,6 +232,73 @@
                     />
 
             </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/event_ll_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000000" />
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="文件名" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="上传时间" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="大小" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="拥有人" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="操作" />
+                    </TableRow>
+                    <com.aichifan.app4myqa.vagerview.attachmentListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:divider="#00000000"
+                        android:dividerHeight="10dp"
+                        android:id="@+id/event_lv_attachment"/>
+                </TableLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000000" />
+            </LinearLayout>
+
 
             <RelativeLayout
                 android:layout_marginTop="20dp"

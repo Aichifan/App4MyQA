@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -21,8 +22,10 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.aichifan.app4myqa.adapter.attachmentAdapter;
 import com.aichifan.app4myqa.pojo.City;
 import com.aichifan.app4myqa.pojo.ProjectName;
 import com.aichifan.app4myqa.pojo.Question;
@@ -55,7 +58,7 @@ import okhttp3.Response;
 /**
  * Created by mic on 2016/8/30.
  */
-public class EventAddActivity extends UserInfoActivity {
+public class EventAddActivity extends UserInfoActivity implements attachmentAdapter.Callback{
 
     private static final int IMAGE_REQUEST_CODE = 1;
     private static final int PICK_CONTACT_REQUEST = 2;
@@ -85,7 +88,7 @@ public class EventAddActivity extends UserInfoActivity {
     private EditText event_actual_delivery_time;
     private List<Integer> lists;
     private List<Integer> ids;
-    private List<QuestionAttachment> questionAttachments;
+    public  List<QuestionAttachment> questionAttachments;
 
     private EditText event_spc_name_select;
     private EditText event_et_order_no;
@@ -99,9 +102,12 @@ public class EventAddActivity extends UserInfoActivity {
 
     private Button event_bt_accessory;
     private Button event_bt_commit;
+    private static LinearLayout event_ll_down;
+    private ListView event_lv_attachment;
+    private attachmentAdapter adapter;
 
-    private String shijianchuo;
     private String picturePath;
+    private SimpleDateFormat simple;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -187,7 +193,6 @@ public class EventAddActivity extends UserInfoActivity {
         if (event_feedback_select.getText().toString().equals("Y")) {
             question.setIsCFeedback(true);
         } else {
-            System.out.println("+++++++++++");
             question.setIsCFeedback(false);
         }
 
@@ -263,6 +268,10 @@ public class EventAddActivity extends UserInfoActivity {
         question.setRootCause(event_root_cause.getText().toString());
         question.setCorrectiveAction(event_corrective_action.getText().toString());
         if (questionAttachments!=null) {
+            question.setAttachmentList(questionAttachments);
+        }
+        if (questionAttachments.size() == 0){
+            questionAttachments = null;
             question.setAttachmentList(questionAttachments);
         }
         clearData();
@@ -448,9 +457,14 @@ public class EventAddActivity extends UserInfoActivity {
         event_corrective_action = (EditText) findViewById(R.id.event_corrective_action);
         event_bt_accessory = (Button) findViewById(R.id.event_bt_accessory);
         event_bt_commit = (Button) findViewById(R.id.event_bt_commit);
+        event_ll_down = (LinearLayout) findViewById(R.id.event_ll_down);
+
+
+
         lists = new ArrayList<Integer>();
         ids = new ArrayList<Integer>();
         questionAttachments = new ArrayList<QuestionAttachment>();
+        event_lv_attachment = (ListView) findViewById(R.id.event_lv_attachment);
 
         event_bt_commit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -504,7 +518,8 @@ public class EventAddActivity extends UserInfoActivity {
                                     RequestBody.create(MediaType.parse("text/plain"), file))
                             .build();
 
-                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").post(body).build();
+                    Request request = new Request.Builder().url(MainActivity.HOST + "/question/attachment/upload").addHeader("Cookie",
+                            TextUtils.join(";",  MyUrlUtil.msCookieManager.getCookieStore().getCookies())).post(body).build();
                     Response response = null;
                     try {
                         response = client.newCall(request).execute();
@@ -522,7 +537,26 @@ public class EventAddActivity extends UserInfoActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (questionAttachments!=null){
+                                event_ll_down.setVisibility(View.VISIBLE);
+                                if(adapter==null){
+                                    adapter = new attachmentAdapter(getApplicationContext(),questionAttachments,EventAddActivity.this);
+                                    event_lv_attachment.setAdapter(adapter);
+                                }else {
+//                                    attachmentAdapter.questionAttachments = questionAttachments;
+                                    Log.v("+++++++",adapter.getCount()+"");
+                                    if (adapter.getCount() == 0){
+                                        event_ll_down.setVisibility(View.GONE);
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                }
+//
+                            }
+                        }
+                    });
 
                 }
             }).start();
@@ -533,7 +567,6 @@ public class EventAddActivity extends UserInfoActivity {
 
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        Log.v("++++", permissionCheck + "");
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                     this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -561,5 +594,13 @@ public class EventAddActivity extends UserInfoActivity {
             }
 
         }
+    }
+
+    @Override
+    public void click(View v) {
+        Log.v("+++++i",v.getTag()+"");
+        int posi = (int) v.getTag();
+        questionAttachments.remove(posi);
+        adapter.notifyDataSetChanged();
     }
 }

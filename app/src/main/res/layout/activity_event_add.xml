@@ -5,11 +5,11 @@
     android:orientation="vertical">
 
     <ViewStub
+        android:id="@+id/stubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/stubHeader"
         android:inflatedId="@+id/header"
-        android:layout="@layout/header"/>
+        android:layout="@layout/header" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -98,13 +98,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="*事件参与人："
-                android:textSize="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="*事件参与人："
+                    android:textSize="15dp" />
+
                 <TextView
                     android:id="@+id/event_tv_city"
                     android:layout_width="wrap_content"
@@ -113,13 +114,14 @@
                     android:layout_marginTop="10dp"
                     android:textSize="15dp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/event_ll_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:orientation="vertical">
 
             </LinearLayout>
 
@@ -236,11 +238,10 @@
                 android:id="@+id/event_spc_name_select"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@drawable/bg_edittext"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:background="@drawable/bg_edittext"
-                android:hint="@string/event_spc_name"
-                />
+                android:hint="@string/event_spc_name" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -255,9 +256,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:background="@drawable/bg_edittext"
                 android:hint="订单号"
                 android:padding="5dp" />
 
@@ -274,9 +275,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/bg_edittext"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:background="@drawable/bg_edittext"
                 android:hint="@string/event_hawb"
                 android:padding="5dp" />
 
@@ -294,9 +295,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_edittext"
-                android:gravity="left|top"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:gravity="left|top"
                 android:hint="@string/event_part_information"
                 android:minHeight="150dp"
                 android:padding="5dp" />
@@ -373,9 +374,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_edittext"
-                android:gravity="left|top"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:gravity="left|top"
                 android:hint="@string/event_problem_statement"
                 android:minHeight="150dp"
                 android:padding="5dp" />
@@ -394,9 +395,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_edittext"
-                android:gravity="left|top"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:gravity="left|top"
                 android:hint="@string/event_recovery_description"
                 android:minHeight="150dp"
                 android:padding="5dp" />
@@ -415,11 +416,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="left|top"
                 android:hint="@string/event_root_cause"
                 android:minHeight="150dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:padding="5dp" />
 
             <TextView
@@ -436,11 +437,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/bg_edittext"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="left|top"
                 android:hint="@string/event_corrective_action"
                 android:minHeight="150dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:padding="5dp" />
 
             <RelativeLayout
@@ -462,17 +463,84 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/event_tv_accessory"
                     android:background="@drawable/bg_button_accessory"
+                    android:onClick="selectPicture"
                     android:padding="10dp"
                     android:text="+Select files..."
                     android:textColor="#ffffff"
-                    android:onClick="selectPicture"
                     android:textSize="15dp" />
             </RelativeLayout>
 
+            <LinearLayout
+                android:id="@+id/event_ll_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000000" />
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="文件名" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="上传时间" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="大小" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="拥有人" />
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:text="操作" />
+                    </TableRow>
+                    <com.aichifan.app4myqa.vagerview.attachmentListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:divider="#00000000"
+                        android:dividerHeight="10dp"
+                        android:id="@+id/event_lv_attachment"/>
+                </TableLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#000000" />
+            </LinearLayout>
+
             <RelativeLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal">
 
                 <Button
@@ -481,14 +549,13 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_button_commit"
                     android:text="提交"
-                    android:textColor="#ffffff"
-                    />
+                    android:textColor="#ffffff" />
             </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
-            
+
         </LinearLayout>
     </ScrollView>
 

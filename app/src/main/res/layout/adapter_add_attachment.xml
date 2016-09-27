@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow>
+
+            <com.aichifan.app4myqa.vagerview.MarqueeTextView
+                android:id="@+id/event_tv_file_name"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:lines="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:text="文件名"
+                android:textSize="15dp" />
+
+            <com.aichifan.app4myqa.vagerview.MarqueeTextView
+                android:id="@+id/event_tv_date"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="上传时间"
+                android:lines="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/event_tv_size"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="大小"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/event_tv_owner"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="拥有人"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/event_bt_delete"
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:background="@color/red"
+                android:text="删除"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
